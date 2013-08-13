@@ -17,9 +17,9 @@ TODO list:
 
 3.  add a songProgress bar.
 
-4.  add playList support, (not priority)
+4.  add playList support, (no priority)
 
-5.  Make the fileName   bounce in RainBowColors to the base of the music.
+5.  Make the fileName   bounce in RainBowColors to the bass of the music.
 
 
 Volume control is not needed as it would bloat the GUI too much.
