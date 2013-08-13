@@ -19,7 +19,7 @@ TODO list:
 
 4.  add playList support, (no priority)
 
-5.  Make the fileName   bounce in RainBowColors to the bass of the music.
+5.  Make the fileName   bounce in RainBowColors to the beat of the music.
 
 
 Volume control is not needed as it would bloat the GUI too much.
