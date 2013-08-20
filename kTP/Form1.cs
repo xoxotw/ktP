@@ -1,9 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
+//using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Linq;
+//using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,29 +18,43 @@ namespace kTP
         {
             InitializeComponent();
         }
-
-        private void buttonOpen_Click(object sender, EventArgs e)
-        {
-            openFileDialog1.ShowDialog();
-        }
-
+        
         private void openFileDialog1_FileOk(object sender, CancelEventArgs e)
         {
-            songLabel.Text = openFileDialog1.FileName;
-            player.open(openFileDialog1.FileName);
+            songLabel.Text = openFileDialog1.SafeFileName;
+            player.Open(openFileDialog1.FileName);
         }
-
-        private void buttonPlay_Click(object sender, EventArgs e)
-        {
-            player.play();
-        }
-
-        private void buttonStop_Click(object sender, EventArgs e)
-        {
-            player.pause();
-        }
-
         
+            // KeyDown Event
+        private void o(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.O:
+                    openFileDialog1.ShowDialog();
+                    break;
+                case Keys.P:
+                    player.Play();
+                    break;
+                case Keys.Space:
+                    player.Pause();
+                    break;
+                case Keys.S:
+                    player.Stop();
+                    break;
+                case Keys.R:
+                    player.ReturnToStart();
+                    break;
+                case Keys.F:
+                    player.FFW();
+                    break;
+                default:
+                    break;
+            }
 
+
+        }
+            
+                
     }
 }
