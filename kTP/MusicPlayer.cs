@@ -3,11 +3,13 @@ using System.Text;
 
 namespace kTP
 {
-    class MusicPlayer
+    public class MusicPlayer
     {
         [DllImport("winmm.dll")]
-        private static extern long mciSendString(string lpstrCommand, StringBuilder lpstrReturnString, int uReturnLength, int hwndCallback); 
-    
+        private static extern long mciSendString(string lpstrCommand, StringBuilder lpstrReturnString, int uReturnLength, int hwndCallback);
+
+        private bool isPlaying = false;
+        private int ffw5sec = 5000;
 
         public void Open(string file)
         {
@@ -17,18 +19,21 @@ namespace kTP
 
         public void Play()
         {
+            isPlaying = true;
             string command = "play MyMp3";
             mciSendString(command, null, 0, 0);
         }
 
         public void Pause()
         {
+            isPlaying = false;
             string command = "pause MyMp3";
             mciSendString(command, null, 0, 0);
         }
 
         public void Stop()
         {
+            isPlaying = false;
             string command = "stop MyMp3";
             mciSendString(command, null, 0, 0);
 
@@ -39,6 +44,7 @@ namespace kTP
             // return to start of song and resume playback
         public void ReturnToStart()
         {
+            isPlaying = true;
             string command = "seek MyMp3 to start";
             mciSendString(command, null, 0, 0);
 
@@ -46,15 +52,24 @@ namespace kTP
             mciSendString(command, null, 0, 0);
         }
 
-            // TODO: add a loop to increase the "ms value for each keypress"
+            // Fast Forward
+                // needs a better skip Implementation
         public void FFW()
         {
-            string command = "set MyMp3 time format ms";
-            mciSendString(command, null, 0, 0);
+            if (isPlaying == true)
+            {
+                string command = "set MyMp3 time format ms";
+                mciSendString(command, null, 0, 0);
 
-            command = "seek MyMp3 to 10000";
-            mciSendString(command, null, 0, 0);
-        }
+                command = "seek MyMp3 to " + ffw5sec.ToString();
+                mciSendString(command, null, 0, 0);
+
+                command = "play MyMp3";
+                mciSendString(command, null, 0, 0);
+
+                ffw5sec += 5000;
+            }
+         }
 
     }
 }
